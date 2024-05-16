@@ -4,6 +4,8 @@
 
 QuoteHarbor is a simple web application hosted on GitHub Pages that allows users to discover and enjoy inspiring quotes. Users can choose between text and image quotes to suit their preferences.
 
+![QuoteHarbor](https://github.com/ThatSINEWAVE/QuoteHarbor/assets/133239148/edfb9ea3-6b62-4656-a47b-64525f1ff7d5)
+
 </div>
 
 ## Features
