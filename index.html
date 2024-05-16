@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zen Quotes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="theme-toggle">
+            <i class="fas fa-sun"></i>
+            <div class="toggle-slider">
+                <div class="toggle-button"></div>
+            </div>
+            <i class="fas fa-moon"></i>
+        </div>
+    </header>
+
+    <main>
+        <div class="quote-options">
+            <h1>Choose your style</h1>
+            <div class="buttons">
+                <button class="quote-btn" id="text-quote-btn">Text Quote</button>
+                <button class="quote-btn" id="image-quote-btn">Image Quote</button>
+            </div>
+        </div>
+        <div class="quote-container">
+            <!-- Quote content will be inserted here -->
+        </div>
+        <button class="get-quote-btn" id="get-quote-btn" style="display: none;">Get Another Quote</button>
+    </main>
+
+    <footer>
+        <a href="#" target="_blank"><i class="fab fa-discord"></i></a>
+        <a href="#" target="_blank"><i class="fas fa-heart"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
