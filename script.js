@@ -5,6 +5,7 @@ const imageQuoteBtn = document.getElementById('image-quote-btn');
 const quoteContainer = document.querySelector('.quote-container');
 const getQuoteBtn = document.getElementById('get-quote-btn');
 const quoteOptions = document.querySelector('.quote-options');
+const spinner = document.getElementById('spinner');
 
 // Initialize quote type
 let quoteType = null;
@@ -32,9 +33,11 @@ function loadThemePreference() {
 // Function to fetch and display text quote
 async function getTextQuote() {
     try {
-        const response = await fetch('https://zenquotes.io/api/random');
+        const timestamp = new Date().getTime();
+        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://zenquotes.io/api/random')}?timestamp=${timestamp}`);
         const data = await response.json();
-        const quote = data[0];
+        const quoteData = JSON.parse(data.contents);
+        const quote = quoteData[0];
         quoteContainer.innerHTML = `
             <p class="quote-text">${quote.q}</p>
             <p class="quote-author">- ${quote.a}</p>
@@ -48,14 +51,19 @@ async function getTextQuote() {
 // Function to fetch and display image quote
 async function getImageQuote() {
     try {
-        const response = await fetch('https://zenquotes.io/api/image');
-        const blob = await response.blob();
+        spinner.style.display = 'block';
+        const timestamp = new Date().getTime();
+        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://zenquotes.io/api/image')}?timestamp=${timestamp}`);
+        const data = await response.json();
+        const blob = await fetch(data.contents).then(res => res.blob());
         const imageUrl = URL.createObjectURL(blob);
         quoteContainer.innerHTML = `
             <img class="quote-image" src="${imageUrl}" alt="Quote Image">
         `;
+        spinner.style.display = 'none';
         showQuoteContainer();
     } catch (error) {
+        spinner.style.display = 'none';
         console.error('Error fetching quote image:', error);
     }
 }
