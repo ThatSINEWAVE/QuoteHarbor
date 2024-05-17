@@ -13,9 +13,9 @@ let quoteType = null;
 const loadingAnimation = document.createElement('div');
 loadingAnimation.classList.add('loading-animation');
 for (let i = 0; i < 3; i++) {
-  const dot = document.createElement('div');
-  dot.classList.add('loading-dot');
-  loadingAnimation.appendChild(dot);
+    const dot = document.createElement('div');
+    dot.classList.add('loading-dot');
+    loadingAnimation.appendChild(dot);
 }
 
 // Function to toggle between light and dark mode
@@ -58,29 +58,48 @@ async function getTextQuote() {
 
 // Function to fetch and display image quote
 async function getImageQuote() {
-  try {
-    quoteOptions.classList.add('fade-out');
-    setTimeout(() => {
-      quoteOptions.style.display = 'none';
-      quoteContainer.innerHTML = '<div class="loading-container"><p class="loading-text">Finding a quote for you<span class="loading-dots">...</span></p></div>';
-    }, 500);
+    try {
+        // Fade out the quote options
+        quoteOptions.classList.add('fade-out');
+        setTimeout(() => {
+            quoteOptions.style.display = 'none';
 
-    const timestamp = new Date().getTime();
-    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://zenquotes.io/api/image')}?timestamp=${timestamp}`);
-    const data = await response.json();
-    const imageUrl = data.contents;
-    const quoteImage = new Image();
-    quoteImage.src = imageUrl;
-    quoteImage.classList.add('quote-image');
-    quoteImage.alt = 'Quote Image';
-    quoteImage.addEventListener('load', () => {
-      quoteContainer.innerHTML = '';
-      quoteContainer.appendChild(quoteImage);
-      showQuoteContainer();
-    });
-  } catch (error) {
-    console.error('Error fetching quote image:', error);
-  }
+            // Display and fade in the loading text and animation
+            const loadingContainer = document.querySelector('.loading-container');
+            loadingContainer.style.display = 'flex';
+            loadingContainer.classList.add('fade-in');
+
+            // Fetch the image quote after a short delay to allow for the fade-in effect
+            setTimeout(async () => {
+                const timestamp = new Date().getTime();
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://zenquotes.io/api/image')}?timestamp=${timestamp}`);
+                const data = await response.json();
+                const imageUrl = data.contents;
+                const quoteImage = new Image();
+                quoteImage.src = imageUrl;
+                quoteImage.classList.add('quote-image');
+                quoteImage.alt = 'Quote Image';
+
+                // When the image loads, transition to showing the image
+                quoteImage.addEventListener('load', () => {
+                    // Fade out the loading text and animation
+                    loadingContainer.classList.remove('fade-in');
+                    loadingContainer.classList.add('fade-out');
+                    setTimeout(() => {
+                        loadingContainer.style.display = 'none';
+                        loadingContainer.classList.remove('fade-out');
+
+                        // Display the image
+                        quoteContainer.innerHTML = '';
+                        quoteContainer.appendChild(quoteImage);
+                        showQuoteContainer();
+                    }, 500); // Delay to allow fade-out animation to complete
+                });
+            }, 500); // Delay before fetching the quote to allow fade-in animation
+        }, 500); // Delay to allow fade-out animation of quote options
+    } catch (error) {
+        console.error('Error fetching quote image:', error);
+    }
 }
 
 // Function to show quote container and hide quote options
@@ -104,12 +123,6 @@ function showQuoteOptions() {
         getQuoteBtn.style.display = 'none';
         quoteOptions.classList.remove('fade-out');
     }, 500); // Delay to allow fade-out animation to complete
-}
-
-// Function to show loading animation
-function showLoadingAnimation() {
-    quoteContainer.innerHTML = '';
-    quoteContainer.appendChild(loadingAnimation);
 }
 
 // Event listeners
