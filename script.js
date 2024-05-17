@@ -5,10 +5,18 @@ const imageQuoteBtn = document.getElementById('image-quote-btn');
 const quoteContainer = document.querySelector('.quote-container');
 const getQuoteBtn = document.getElementById('get-quote-btn');
 const quoteOptions = document.querySelector('.quote-options');
-const spinner = document.getElementById('spinner');
 
 // Initialize quote type
 let quoteType = null;
+
+// Create loading animation element
+const loadingAnimation = document.createElement('div');
+loadingAnimation.classList.add('loading-animation');
+for (let i = 0; i < 3; i++) {
+  const dot = document.createElement('div');
+  dot.classList.add('loading-dot');
+  loadingAnimation.appendChild(dot);
+}
 
 // Function to toggle between light and dark mode
 function toggleTheme() {
@@ -50,36 +58,58 @@ async function getTextQuote() {
 
 // Function to fetch and display image quote
 async function getImageQuote() {
-    try {
-        spinner.style.display = 'block';
-        const timestamp = new Date().getTime();
-        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://zenquotes.io/api/image')}?timestamp=${timestamp}`);
-        const data = await response.json();
-        const blob = await fetch(data.contents).then(res => res.blob());
-        const imageUrl = URL.createObjectURL(blob);
-        quoteContainer.innerHTML = `
-            <img class="quote-image" src="${imageUrl}" alt="Quote Image">
-        `;
-        spinner.style.display = 'none';
-        showQuoteContainer();
-    } catch (error) {
-        spinner.style.display = 'none';
-        console.error('Error fetching quote image:', error);
-    }
+  try {
+    quoteOptions.classList.add('fade-out');
+    setTimeout(() => {
+      quoteOptions.style.display = 'none';
+      quoteContainer.innerHTML = '<div class="loading-container"><p class="loading-text">Finding a quote for you<span class="loading-dots">...</span></p></div>';
+    }, 500);
+
+    const timestamp = new Date().getTime();
+    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://zenquotes.io/api/image')}?timestamp=${timestamp}`);
+    const data = await response.json();
+    const imageUrl = data.contents;
+    const quoteImage = new Image();
+    quoteImage.src = imageUrl;
+    quoteImage.classList.add('quote-image');
+    quoteImage.alt = 'Quote Image';
+    quoteImage.addEventListener('load', () => {
+      quoteContainer.innerHTML = '';
+      quoteContainer.appendChild(quoteImage);
+      showQuoteContainer();
+    });
+  } catch (error) {
+    console.error('Error fetching quote image:', error);
+  }
 }
 
 // Function to show quote container and hide quote options
 function showQuoteContainer() {
-    quoteOptions.style.display = 'none';
-    quoteContainer.style.display = 'block';
-    getQuoteBtn.style.display = 'block';
+    quoteOptions.classList.add('fade-out');
+    setTimeout(() => {
+        quoteOptions.style.display = 'none';
+        quoteContainer.style.display = 'block';
+        getQuoteBtn.style.display = 'block';
+        quoteContainer.classList.add('fade-in');
+    }, 500); // Delay to allow fade-out animation to complete
 }
 
 // Function to hide quote container and show quote options
 function showQuoteOptions() {
-    quoteOptions.style.display = 'flex';
-    quoteContainer.style.display = 'none';
-    getQuoteBtn.style.display = 'none';
+    quoteContainer.classList.remove('fade-in');
+    quoteContainer.classList.add('fade-out');
+    setTimeout(() => {
+        quoteContainer.style.display = 'none';
+        quoteOptions.style.display = 'flex';
+        getQuoteBtn.style.display = 'none';
+        quoteOptions.classList.remove('fade-out');
+    }, 500); // Delay to allow fade-out animation to complete
+}
+
+// Function to show loading animation
+function showLoadingAnimation() {
+    quoteContainer.innerHTML = '';
+    quoteContainer.appendChild(loadingAnimation);
 }
 
 // Event listeners
