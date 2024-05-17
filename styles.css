@@ -29,7 +29,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
@@ -52,7 +52,7 @@ header {
     border-radius: 12.5px;
     position: relative;
     margin: 0 0.5rem;
-    transition: background-color 0.3s ease; /* Smooth transition for theme change */
+    transition: background-color 0.3s ease;
 }
 
 .toggle-button {
@@ -63,7 +63,7 @@ header {
     position: absolute;
     top: 2.5px;
     left: 2.5px;
-    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for theme change */
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .dark-mode .toggle-button {
@@ -90,7 +90,7 @@ h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     text-align: center;
-    transition: color 0.3s ease; /* Smooth transition for theme change */
+    transition: color 0.3s ease;
 }
 
 .buttons {
@@ -102,7 +102,7 @@ h1 {
     background-color: var(--accent-color);
     color: var(--secondary-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 1rem 2rem;
     font-size: 1.2rem;
     margin: 0 1rem;
@@ -120,30 +120,29 @@ h1 {
     text-align: center;
     margin-bottom: 2rem;
     position: relative;
-    transition: color 0.3s ease; /* Smooth transition for theme change */
+    transition: color 0.3s ease;
 }
 
-.spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border-left-color: var(--accent-color);
-    animation: spin 1s ease infinite;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none; /* Hide spinner by default */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
 
-@keyframes spin {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
+.loading-text {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.loading-dots {
+  animation: loading-dots 1s infinite;
+}
+
+@keyframes loading-dots {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
 }
 
 .quote-text {
@@ -159,15 +158,15 @@ h1 {
 .quote-image {
     max-width: 100%;
     height: auto;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
 }
 
 .get-quote-btn {
     background-color: var(--accent-color);
     color: var(--secondary-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 1rem 2rem;
     font-size: 1.2rem;
     cursor: pointer;
@@ -190,9 +189,19 @@ footer a {
     color: var(--primary-color);
     font-size: 1.5rem;
     margin: 0 1rem;
-    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 footer a:hover {
     transform: scale(1.2);
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
 }
