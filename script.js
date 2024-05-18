@@ -64,12 +64,11 @@ async function getImageQuote() {
         setTimeout(() => {
             quoteOptions.style.display = 'none';
 
-            // Display and fade in the loading text and animation
+            // Display the loading text and animation
             const loadingContainer = document.querySelector('.loading-container');
             loadingContainer.style.display = 'flex';
-            loadingContainer.classList.add('fade-in');
 
-            // Fetch the image quote after a short delay to allow for the fade-in effect
+            // Fetch the image quote after a short delay to allow for the loading animation
             setTimeout(async () => {
                 const timestamp = new Date().getTime();
                 const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://zenquotes.io/api/image')}?timestamp=${timestamp}`);
@@ -82,20 +81,25 @@ async function getImageQuote() {
 
                 // When the image loads, transition to showing the image
                 quoteImage.addEventListener('load', () => {
-                    // Fade out the loading text and animation
-                    loadingContainer.classList.remove('fade-in');
-                    loadingContainer.classList.add('fade-out');
-                    setTimeout(() => {
-                        loadingContainer.style.display = 'none';
-                        loadingContainer.classList.remove('fade-out');
+                    // Fade in the loading animation
+                    loadingContainer.classList.add('fade-in');
 
-                        // Display the image
-                        quoteContainer.innerHTML = '';
-                        quoteContainer.appendChild(quoteImage);
-                        showQuoteContainer();
-                    }, 500); // Delay to allow fade-out animation to complete
+                    // After a short delay, fade out the loading animation and display the image
+                    setTimeout(() => {
+                        loadingContainer.classList.remove('fade-in');
+                        loadingContainer.classList.add('fade-out');
+                        setTimeout(() => {
+                            loadingContainer.style.display = 'none';
+                            loadingContainer.classList.remove('fade-out');
+
+                            // Display the image
+                            quoteContainer.innerHTML = '';
+                            quoteContainer.appendChild(quoteImage);
+                            showQuoteContainer();
+                        }, 500); // Delay to allow fade-out animation to complete
+                    }, 1000); // Delay to allow the loading animation to be visible for some time
                 });
-            }, 500); // Delay before fetching the quote to allow fade-in animation
+            }, 500); // Delay before fetching the quote to allow for the loading animation
         }, 500); // Delay to allow fade-out animation of quote options
     } catch (error) {
         console.error('Error fetching quote image:', error);
