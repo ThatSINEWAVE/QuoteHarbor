@@ -1,220 +1,233 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --primary-color: #333;
-    --secondary-color: #fff;
-    --accent-color: #6c63ff;
-    --background-color: #f5f5f5;
-    --shadow-color: rgba(0, 0, 0, 0.2);
+	--primary-color: #333;
+	--secondary-color: #fff;
+	--accent-color: #6c63ff;
+	--background-color: #f5f5f5;
+	--shadow-color: rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode {
-    --primary-color: #fff;
-    --secondary-color: #333;
-    --background-color: #222;
-    --shadow-color: rgba(255, 255, 255, 0.2);
+	--primary-color: #fff;
+	--secondary-color: #333;
+	--background-color: #222;
+	--shadow-color: rgba(255, 255, 255, 0.2);
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: background-color 0.3s ease, color 0.3s ease;
+	font-family: 'Poppins', sans-serif;
+	background-color: var(--background-color);
+	color: var(--primary-color);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	padding: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .theme-toggle {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 }
 
 .toggle-slider {
-    width: 50px;
-    height: 25px;
-    background-color: var(--accent-color);
-    border-radius: 12.5px;
-    position: relative;
-    margin: 0 0.5rem;
-    transition: background-color 0.3s ease;
+	width: 50px;
+	height: 25px;
+	background-color: var(--accent-color);
+	border-radius: 12.5px;
+	position: relative;
+	margin: 0 0.5rem;
+	transition: background-color 0.3s ease;
 }
 
 .toggle-button {
-    width: 20px;
-    height: 20px;
-    background-color: var(--secondary-color);
-    border-radius: 50%;
-    position: absolute;
-    top: 2.5px;
-    left: 2.5px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+	width: 20px;
+	height: 20px;
+	background-color: var(--secondary-color);
+	border-radius: 50%;
+	position: absolute;
+	top: 2.5px;
+	left: 2.5px;
+	transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .dark-mode .toggle-button {
-    transform: translateX(25px);
+	transform: translateX(25px);
 }
 
 main {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem;
 }
 
 .quote-options {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 2rem;
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+	text-align: center;
 }
 
 .buttons {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .quote-btn {
-    background-color: var(--accent-color);
-    color: var(--secondary-color);
-    border: none;
-    border-radius: 10px;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    margin: 0 1rem;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+	background-color: var(--accent-color);
+	color: var(--secondary-color);
+	border: none;
+	border-radius: 10px;
+	padding: 1rem 2rem;
+	font-size: 1.2rem;
+	margin: 0 1rem;
+	cursor: pointer;
+	transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+	/* Smooth transition for theme change */
 }
 
 .quote-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px var(--shadow-color);
+	transform: scale(1.1);
+	box-shadow: 0 0 30px var(--shadow-color);
 }
 
 .quote-container {
-    max-width: 800px;
-    text-align: center;
-    margin-bottom: 2rem;
-    position: relative;
-    transition: color 0.3s ease;
+	max-width: 800px;
+	text-align: center;
+	margin-bottom: 2rem;
+	position: relative;
+	transition: color 0.3s ease;
 }
 
 .loading-container {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	height: 150px;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
 }
 
 .loading-container.fade-in {
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+	opacity: 1;
+	transition: opacity 0.5s ease-in-out;
 }
 
 .loading-container.fade-out {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
 }
 
 .loading-text {
-    font-size: 1.5rem;
-    text-align: center;
+	font-size: 1.5rem;
+	text-align: center;
 }
 
 .loading-dots::after {
-    content: '...';
-    animation: loading-dots 1s infinite steps(3, end);
+	content: '...';
+	animation: loading-dots 1s infinite steps(3, end);
 }
 
 @keyframes loading-dots {
-    0% { content: ""; }
-    33% { content: "."; }
-    66% { content: ".."; }
-    100% { content: "..."; }
+	0% {
+		content: "";
+	}
+
+	33% {
+		content: ".";
+	}
+
+	66% {
+		content: "..";
+	}
+
+	100% {
+		content: "...";
+	}
 }
 
 .quote-text {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
 }
 
 .quote-author {
-    font-size: 1.2rem;
-    font-style: italic;
+	font-size: 1.2rem;
+	font-style: italic;
 }
 
 .quote-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+	max-width: 100%;
+	height: auto;
+	border-radius: 10px;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
 }
 
 .get-quote-btn {
-    background-color: var(--accent-color);
-    color: var(--secondary-color);
-    border: none;
-    border-radius: 10px;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+	background-color: var(--accent-color);
+	color: var(--secondary-color);
+	border: none;
+	border-radius: 10px;
+	padding: 1rem 2rem;
+	font-size: 1.2rem;
+	cursor: pointer;
+	transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+	/* Smooth transition for theme change */
 }
 
 .get-quote-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px var(--shadow-color);
+	transform: scale(1.1);
+	box-shadow: 0 0 30px var(--shadow-color);
 }
 
 footer {
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	padding: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 footer a {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    margin: 0 1rem;
-    transition: transform 0.3s ease, color 0.3s ease;
+	color: var(--primary-color);
+	font-size: 1.5rem;
+	margin: 0 1rem;
+	transition: transform 0.3s ease, color 0.3s ease;
 }
 
 footer a:hover {
-    transform: scale(1.2);
+	transform: scale(1.2);
 }
 
 .fade-out {
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
+	opacity: 0;
+	transition: opacity 0.5s ease-out;
 }
 
 .fade-in {
-    opacity: 1;
-    transition: opacity 0.5s ease-in;
+	opacity: 1;
+	transition: opacity 0.5s ease-in;
 }
